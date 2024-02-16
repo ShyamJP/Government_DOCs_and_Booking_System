@@ -1,6 +1,7 @@
 const userdb = require("../models/user");
 const { z } = require("zod");
 const { secret } = require("../config");
+const jwt = require('jsonwebtoken')
 
 const userSchema = z.object({
   name: z.string().min(2),
@@ -14,16 +15,22 @@ async function login(req, res) {
 
   const user = await userdb.find({ email, pass });
 
-  if (user.length > 0) {
-    const token = jwt.sign(
-      {
-        email,
-      },
-      secret
-    );
-    res.json({ token });
+  try {
+    if (user) {
+      const token = jwt.sign(
+        {
+          email,
+        },
+        secret
+      );
+      res.json({ token });
+    }
+  } catch (error) {
+    console.log(error);
   }
 }
+
+
 async function signup(req, res) {
   try {
     const { name, password, email } = userSchema.parse(req.body);
