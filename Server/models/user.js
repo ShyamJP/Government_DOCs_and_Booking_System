@@ -13,7 +13,14 @@ const userSchema = new mongoose.Schema({
         type: String,
         required : true
     },
+    AgeGroup : {
+        type : Number,
+        required : true
+    }
 })
 
+
+
 const userModel = mongoose.model('user',userSchema);
-module.exports = userModel;
+
+module.exports = {userModel};
