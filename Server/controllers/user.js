@@ -50,6 +50,6 @@ async function signup(req, res) {
 }
 
 const SlotBooking = async () => {
-  const {na}
+  
 }
 module.exports = { login, signup };
