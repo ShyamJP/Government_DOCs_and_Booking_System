@@ -1,5 +1,5 @@
 const userdb = require("../models/user");
-const BookingModel = require('../models/booking');
+const bookingdb = require("../models/booking")
 const { z } = require("zod");
 const { secret } = require("../config");
 const jwt = require('jsonwebtoken')
@@ -9,6 +9,15 @@ const userSchema = z.object({
   email: z.string().email(),
   password: z.string().min(6),
   AgeGroup: z.number().min(0).max(100)
+});
+
+const BookingSchema = z.object({
+  userId: z.string(), 
+  name: z.string(), 
+  email: z.string().email(), 
+  DocumentType: z.string(), 
+  AppointmentDate: z.string(),
+  TimeSlot: z.string(),
 });
 
 async function login(req, res) {
@@ -49,7 +58,20 @@ async function signup(req, res) {
   }
 }
 
-const SlotBooking = async () => {
-  const {na}
+const SlotBooking = async (req,res) => {
+  // const id = req.params.id;
+  try{
+    const { id , name , email , DocumentType , AppointmentDate , TimeSlot } = BookingSchema.parse(req.body);
+    await bookingdb.create({
+      userId : id , name , email , DocumentType , AppointmentDate , TimeSlot 
+    }).then((result) => {
+      res.json({message:"Booking Data Added",result});
+    }).catch((err) => {
+      res.json({message:"fail to send Data of Booking",err})
+    });
+  }catch(err){
+    console.log(err);
+  }
 }
-module.exports = { login, signup };
+
+module.exports = { login, signup , SlotBooking};
