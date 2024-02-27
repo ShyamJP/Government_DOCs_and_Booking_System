@@ -58,20 +58,7 @@ async function signup(req, res) {
   }
 }
 
-const SlotBooking = async (req,res) => {
-  // const id = req.params.id;
-  try{
-    const { id , name , email , DocumentType , AppointmentDate , TimeSlot } = BookingSchema.parse(req.body);
-    await bookingdb.create({
-      userId : id , name , email , DocumentType , AppointmentDate , TimeSlot 
-    }).then((result) => {
-      res.json({message:"Booking Data Added",result});
-    }).catch((err) => {
-      res.json({message:"fail to send Data of Booking",err})
-    });
-  }catch(err){
-    console.log(err);
-  }
+const SlotBooking = async () => {
+  const {na}
 }
-
-module.exports = { login, signup , SlotBooking};
+module.exports = { login, signup };
