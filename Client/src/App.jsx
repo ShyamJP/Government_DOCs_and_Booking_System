@@ -1,6 +1,7 @@
 import './App.css'
 import {BrowserRouter,Routes,Route} from "react-router-dom"
 import Home from './Components/Home/home'
+import DocPage from './Components/Doc/DocPage'
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
             <Route path='/' element={<Home />}></Route>
             <Route path='/home' element={<Home />}></Route>
             <Route path='/Booking' ></Route>
-            <Route path='/doc' ></Route>
+            <Route path='/doc' element={<DocPage />}></Route>
         </Routes>
       </BrowserRouter>
     </>

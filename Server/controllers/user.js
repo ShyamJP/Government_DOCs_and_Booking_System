@@ -18,12 +18,7 @@ async function login(req, res) {
 
   try {
     if (user) {
-      const token = jwt.sign(
-        {
-          email,
-        },
-        secret
-      );
+      const token = jwt.sign({email},secret);
       res.json({ token });
     }
   } catch (error) {

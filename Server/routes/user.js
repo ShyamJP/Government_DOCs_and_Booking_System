@@ -6,6 +6,6 @@ const {userMiddleware} = require('../middleware/user')
 
 router.post('/signup',signup);
 router.post('/login', login, userMiddleware);
-router.post('/book',userMiddleware,booking);
+router.post('/book',userMiddleware);
 
 module.exports = router;
